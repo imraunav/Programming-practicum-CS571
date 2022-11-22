@@ -107,7 +107,7 @@ for i, name in enumerate(fileNames):
 
 # %%
 # importing the audiofile
-audioSelection = int(input(AudioFileMenu))
+audioSelection = 2 #int(input(AudioFileMenu))
 audioData, sr_native = lb.load(path+fileNames[audioSelection], sr = None, mono=False)
 y = audioData[0] # audio data
 egg = audioData[1] #EGG data
@@ -122,14 +122,17 @@ Audio(data=y, rate=sr_native)
 
 # %%
 plt.figure()
+plt.subplot(2, 1, 1)
 visualizeAudio(y, sr_native, fileNames[audioSelection])
-plt.tight_layout(rect = [0, 0, 3, 1])
+# plt.tight_layout(rect = [0, 0, 3, 1])
 # plt.show()
 
 # %%
-plt.figure()
+# plt.figure()
+plt.subplot(2,1,2)
 visualizeAudio(egg, sr_native, fileNames[audioSelection] + ' EGG data')
-plt.tight_layout(rect = [0, 0, 3, 1])
+plt.tight_layout()
+# plt.tight_layout(rect = [0, 0, 3, 1])
 # plt.show()
 
 # %% [markdown]
@@ -144,25 +147,26 @@ eggFrames = getFrames(egg, sr_native, frameLength, hopLength)
 # Checking frames and their spectrum
 
 # %%
-frameNumber = 18
+# #this section is to observe the spectrum of a single frame of choice
+# frameNumber = 18
 
-nframeLength = int(frameLength*0.001*sr_native)# ms to n
-hwin = scipy.signal.get_window('hamming', nframeLength)
-visualizeAudio(frames[frameNumber], sr_native, f'Frame number {frameNumber}') # rectangular windowed frame
-visualizeAudio(hwin*frames[frameNumber], sr_native, f'Frame Number {frameNumber}') # hamming windowed frame
-plt.legend(['Rectangular windowing', 'Hamming window'])
-# plt.show()
+# nframeLength = int(frameLength*0.001*sr_native)# ms to n
+# hwin = scipy.signal.get_window('hamming', nframeLength)
+# visualizeAudio(frames[frameNumber], sr_native, f'Frame number {frameNumber}') # rectangular windowed frame
+# visualizeAudio(hwin*frames[frameNumber], sr_native, f'Frame Number {frameNumber}') # hamming windowed frame
+# plt.legend(['Rectangular windowing', 'Hamming window'])
+# # plt.show()
 
-plt.title(f'Spectrum of frame {frameNumber}')
-# fft_plot(frames[frameNumber], sr_native, scale='log')
-fft_plot(hwin*frames[frameNumber], sr_native, scale='log')
-# plt.show()
+# plt.title(f'Spectrum of frame {frameNumber}')
+# # fft_plot(frames[frameNumber], sr_native, scale='log')
+# fft_plot(hwin*frames[frameNumber], sr_native, scale='log')
+# # plt.show()
 
 
-# %%
-#frame number to time
-lb.time_to_frames(0.5, sr=sr_native, hop_length=hopLength*0.001*sr_native)
-# lb.frames_to_time(58, sr=sr_native, hop_length=hopLength*0.001*sr_native)
+# # %%
+# #frame number to time
+# lb.time_to_frames(0.5, sr=sr_native, hop_length=hopLength*0.001*sr_native)
+# # lb.frames_to_time(58, sr=sr_native, hop_length=hopLength*0.001*sr_native)
 
 # %% [markdown]
 # Seperating voiced frames from the segments
@@ -183,7 +187,7 @@ voicedEGGFrames = [f for i, f in enumerate(eggFrames) if i in voicedFrameIndices
 
 # %%
 print(f'Indices of voiced frames = {voicedFrameIndices}')
-len(voicedFrames)
+# len(voicedFrames)
 
 # %% [markdown]
 # Pitch estimation using autocorelation on clipped signal
@@ -206,11 +210,11 @@ for f in voicedEGGFrames:
     n_period = np.diff(peaks)[0]
     pitch_freq = sr_native/n_period
     actual_pitches.append(pitch_freq)
-plt.figure()
-plt.title('Actual pitches for each voiced frame recovered from EGG data')
-plt.plot(voicedFrameIndices, actual_pitches, 'x')
-plt.xlabel('Frame Index')
-plt.ylabel('Frequency')
+# plt.figure()
+# plt.title('Actual pitches for each voiced frame recovered from EGG data')
+# plt.plot(voicedFrameIndices, actual_pitches, 'x')
+# plt.xlabel('Frame Index')
+# plt.ylabel('Frequency')
 # plt.show()
 
 # %%
