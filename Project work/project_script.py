@@ -15,7 +15,7 @@ for i, name in enumerate(fileNames):
         AudioFileMenu = AudioFileMenu + f'{i}. {name}\n'
 
 # importing the audiofile
-audioSelection = 2 #int(input(AudioFileMenu))
+audioSelection = 3 #int(input(AudioFileMenu))
 audioData, sr_native = lb.load(path+fileNames[audioSelection], sr = None, mono=False)
 y = audioData[0] # audio data
 egg = audioData[1] #EGG data
@@ -171,7 +171,10 @@ plt.legend()
 # plt.show()
 
 err = np.array(actual_pitches)-np.array(estimated_pitches)
-np.mean(err**2)
+miss_estimated = 0
+for e in err:
+    if abs(e) > 10:
+        miss_estimated += 1
 # index, len(voicedFrames)
-
+print(f'No. of miss estimated frames = {miss_estimated} out of {len(actual_pitches)} voiced frames')
 plt.show()
