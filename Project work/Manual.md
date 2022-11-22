@@ -5,7 +5,7 @@ The fundamental frequency of a spoken signal is called pitch. More suitable defi
 
 - This code works on an audio file in arctic dataset, which contains **Speech signal** in **Channel 1** and **EGG signal** of the same audio sequence in **Channel 2**.
 
-- To change the audio file in action, change the 'path' varable and the 'audioSelection' in the script.
+- To change the audio file in action, change the =='path'== varable and the =='audioSelection'== in the script.
 
 - Voiced-frames have been chosen using *Zero crossing rate* of a frame in the EGG signal. For a voiced-frame, the *ZCR* is very high, compared to unvoiced-frame. 
 The code plots the **actual pitches** derived from the **EGG data** and the **estimated pitches** from the **Audio data** for each voiced-frame.
