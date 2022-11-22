@@ -9,7 +9,7 @@ Run the following code in commandline to install prerequesits
 ```
 python3 pip install numpy scipy librosa matplotlib 
 ```
-## Using audiofile from directory
+## Using the code
 - Download the [Arctic data](https://github.com/imraunav/Programming-practicum-CS571/tree/main/Project%20work/arctic-20221111T144309Z-001/arctic)
 - To change the audio file in action, change the **'path'** variable and the **'audioSelection'** variable in the script.
 - Use the 'project_script.py' to see the simulation.
