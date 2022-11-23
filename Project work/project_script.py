@@ -55,14 +55,14 @@ def visualizeAudio(y, sr_native, fileName= 'Audio'):
     plt.title(fileName)
     plt.grid(True)
 
-def getVoicedFramesZCR(y, sr, frameLength, hopLength):
+def getVoicedFramesZCR(y, sr, frameLength, hopLength, zcrThreshold= 0.007):
     frameIndex = []
     nframeLength = int(frameLength*0.001*sr)
     nhopLength = int(hopLength*0.001*sr)
     zcr = lb.feature.zero_crossing_rate(y, frame_length=nframeLength, hop_length=nhopLength)
     # print(zcr)
     for i, rate in enumerate(zcr[0]):
-        if rate > 0.007:
+        if rate > zcrThreshold:
             frameIndex.append(i)
     return frameIndex
 
@@ -173,8 +173,9 @@ plt.legend()
 err = np.array(actual_pitches)-np.array(estimated_pitches)
 miss_estimated = 0
 for e in err:
-    if abs(e) > 10:
+    if abs(e) > 20:
         miss_estimated += 1
 # index, len(voicedFrames)
 print(f'No. of miss estimated frames = {miss_estimated} out of {len(actual_pitches)} voiced frames')
+print(f'Percentage of correct estimation = {(1 - miss_estimated/len(actual_pitches))*100: .3f}%')
 plt.show()
