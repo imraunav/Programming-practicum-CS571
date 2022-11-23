@@ -9,6 +9,7 @@ Run the following code in commandline to install prerequisits
 ```
 python3 pip install numpy scipy librosa matplotlib 
 ```
+and download the [Arctic dataset](https://github.com/imraunav/Programming-practicum-CS571/tree/main/Project%20work/arctic-20221111T144309Z-001/arctic)
 ## Using the code
 - Download the [Arctic data](https://github.com/imraunav/Programming-practicum-CS571/tree/main/Project%20work/arctic-20221111T144309Z-001/arctic)
 - To change the audio file in action, change the **'path'** variable and the **'audioSelection'** variable in the script.
